@@ -29,10 +29,30 @@ export function renderPokemonList(pokemonList) {
     const shortDescription = pokemon.shortDescription
       ? `<p><strong>PEQUEÑA DESCRIPCION:</strong> ${pokemon.shortDescription}</p>`
       : "";
+    const description = pokemon.description
+      ? `<p><strong>DESCRIPCION:</strong> ${pokemon.description}</p>`
+      : "";
+    const weakness = pokemon.weakness
+      ? `<p><strong>DEBILIDAD:</strong> ${pokemon.weakness.join(", ")}</p>`
+      : "";
+    const attack = pokemon.attack
+      ? `<p><strong>ATAQUE:</strong> ${pokemon.attack}</p>`
+      : "";
+    const defense = pokemon.defense
+      ? `<p><strong>DEFENSA:</strong> ${pokemon.defense}</p>`
+      : "";
+    const speed = pokemon.speed
+      ? `<p><strong>VELOCIDAD:</strong> ${pokemon.speed}</p>`
+      : "";
 
-    const readMoreButton = `
-      <button class="read-more-button">Leer más</button>
-    `;
+    const facts = pokemon.facts
+      ? `
+      <h4>DATOS CURIOSOS</h4>
+      <p><strong>NUMERO EN LA POKEDEX:</strong> ${pokemon.facts.pokedexNumber}</p>
+      <p><strong>HABLAR:</strong> ${pokemon.facts.ability}</p>
+      <p><strong>COLOR:</strong> ${pokemon.facts.primaryColor}</p>
+    `
+      : "";
 
     li.innerHTML = `
       <div> 
@@ -44,35 +64,26 @@ export function renderPokemonList(pokemonList) {
         ${number}
         ${rarity}
         ${shortDescription}
-        ${readMoreButton}
+        ${description}
+        ${weakness}
+        ${attack}
+        ${defense}
+        ${speed}
+        ${facts}
+
+        
+       
       </div>
-      <div class="details hidden">
-        <p><strong>DESCRIPCION:</strong> ${pokemon.description}</p>
-        <p><strong>DEBILIDAD:</strong> ${pokemon.weakness.join(", ")}</p>
-        <p><strong>ATAQUE:</strong> ${pokemon.attack}</p>
-        <p><strong>DEFENSA:</strong> ${pokemon.defense}</p>
-        <p><strong>VELOCIDAD:</strong> ${pokemon.speed}</p>
-        <p><strong>FACTS:</strong></p>
-        <p><strong>POKEDEX NUMERO:</strong> ${pokemon.facts.pokedexNumber}</p>
-        <p><strong>HABILIDAD:</strong> ${pokemon.facts.ability}</p>
-        <p><strong>COLOR PRINCIPAL:</strong> ${pokemon.facts.primaryColor}</p>
-        </div>
+      
     `;
 
-    // Event listener para mostrar detalles al hacer clic en "Leer más"
-    const detailsDiv = li.querySelector(".details");
-    const readMoreBtn = li.querySelector(".read-more-button");
-    readMoreBtn.addEventListener("click", () => {
-      detailsDiv.classList.toggle("hidden");
-      if (detailsDiv.classList.contains("hidden")) {
-        readMoreBtn.textContent = "Leer más";
-      } else {
-        readMoreBtn.textContent = "Cerrar";
-      }
-      
+    // Agregar evento de clic para imprimir información en la consola
+    li.addEventListener("click", () => {
+      //console.log(`Detalles del Pokémon ${pokemon.name}:`);
+      // console.log(pokemon);
     });
 
+    
     pokemonListElement.appendChild(li);
   });
 }
-

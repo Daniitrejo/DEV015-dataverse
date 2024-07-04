@@ -44,4 +44,3 @@ export function filterPokemonByWord(data, wordValue) {
 export function clearFiltersAndSort(data) {
   return data.sort((a, b) => a.number - b.number);
 }
-
